@@ -1,1 +1,2 @@
 # LearnGaussianSplatting
+学习Gaussian Splatting
