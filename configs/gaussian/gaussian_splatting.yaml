@@ -1,2 +1,26 @@
-gpus: [0]
-experiment_name: gaussian_splatting
+task: gaussian
+exp_name: gaussian_splatting
+gpu_ids: [0]
+
+# modules
+train_dataset_module: lib.datasets.gaussian_splatting.synthetic
+test_dataset_module: lib.datasets.gaussian_splatting.synthetic
+
+# train_dataset
+train_dataset:
+  data_root: 'data/nerf_synthetic'
+
+# test_dataset
+test_dataset:
+  data_root: 'data/nerf_synthetic'
+
+# train
+train:
+  batch_size: 1
+  num_epochs: 100
+  learning_rate: 1e-4
+  num_workers: 4
+
+# test
+test:
+  batch_size: 1

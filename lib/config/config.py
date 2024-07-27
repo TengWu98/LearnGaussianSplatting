@@ -4,16 +4,56 @@ import os
 import numpy as np
 from . import yacs
 
-# create a config object
+# root config object
 cfg = CN()
 
+# task
+cfg.task = "default"
+cfg.task_arg = CN()
+
 # experiment name
-cfg.experiment_name = "default"
+cfg.exp_name = "default"
 
-# gpus
-cfg.gpus = [0]
+# gpu_ids
+cfg.gpu_ids = [0]
 
-# epoch
+# datasets
+cfg.train_dataset_module = ""
+cfg.val_dataset_module = ""
+cfg.test_dataset_module = ""
+
+# network
+cfg.network_module = ""
+
+# loss
+cfg.loss_module = ""
+
+# evaluator
+cfg.evaluator_module = ""
+cfg.skip_eval = False
+
+# visualizer
+cfg.visualizer_module = ""
+
+# -----------------------------------------------------------------------------
+# train
+# -----------------------------------------------------------------------------
+cfg.train = CN()
+cfg.train.num_epoch = 10000
+cfg.train.num_workers = 4
+cfg.train.shuffle = True
+cfg.train.eps = 1e-8
+cfg.train.optimizer = "adam"
+cfg.train.learning_rate = 1e-3
+cfg.train.weight_decay = 0.
+cfg.train.batch_size = 4
+
+# -----------------------------------------------------------------------------
+# test
+# -----------------------------------------------------------------------------
+cfg.test = CN()
+cfg.test.num_epoch = -1
+cfg.test.batch_size = 1
 
 
 def parse_cfg(cfg, args):
@@ -23,12 +63,16 @@ def parse_cfg(cfg, args):
     :param args:
     :return: None
     """
+    # task must be specified
+    if len(cfg.task) == 0:
+        raise ValueError("task is not specified")
+
     # assign the gpus (-1 means cpu)
-    if -1 not in cfg.gpus:
-        os.environ["CUDA_VISIBLE_DEVICES"] = ",".join([str(gpu) for gpu in cfg.gpus])
+    if -1 not in cfg.gpu_ids:
+        os.environ["CUDA_VISIBLE_DEVICES"] = ",".join([str(gpu) for gpu in cfg.gpu_ids])
 
     # experiment name
-    print('Experiment name: {}'.format(cfg.experiment_name))
+    print('current experiment: {}: {}'.format(cfg.task, cfg.exp_name))
 
 def make_config(args):
     """
@@ -58,5 +102,6 @@ def make_config(args):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--cfg_file", default="configs/default.yaml", type=str)
+parser.add_argument("--test", action="store_true", dest="test", default=False)
 args = parser.parse_args()
 cfg = make_config(args)
