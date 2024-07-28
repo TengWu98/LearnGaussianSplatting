@@ -1,5 +1,6 @@
 task: nerf
 exp_name: image_fit
+scene: 'lego'
 gpu_ids: [0]
 
 # modules
@@ -8,12 +9,24 @@ test_dataset_module: lib.datasets.image_fit.synthetic
 network_module: lib.networks.image_fit.network
 loss_module: lib.train.losses.image_fit.loss
 evaluator_module: lib.evaluators.image_fit.evaluator
-visualizer_module: lib.visualizers.image_fit.visualizer
+#visualizer_module: lib.visualizers.image_fit.visualizer
+
+# task_args
+task_args:
+  N_pixels: 8192
+  chunk_size: 16384
 
 # train_dataset
 train_dataset:
   data_root: 'data/nerf_synthetic'
+  split: 'train'
+  view: 0
+  input_ratio: 1.
+
 
 # test_dataset
 test_dataset:
   data_root: 'data/nerf_synthetic'
+  split: 'test'
+  view: 0
+  input_ratio: 0.5

@@ -1,4 +1,6 @@
 import importlib
+from random import shuffle
+
 from torch.utils.data import DataLoader
 
 def make_dataset(cfg, is_train=True):
@@ -22,8 +24,11 @@ def make_data_loader(cfg, is_train=True):
     if is_train:
         batch_size = cfg.train.batch_size
         shuffle = cfg.train.shuffle
+        drop_last = False
     else:
         batch_size = cfg.test.batch_size
+        shuffle = False
+        drop_last = False
 
     dataset = make_dataset(cfg, is_train)
     num_workers = cfg.train.num_workers

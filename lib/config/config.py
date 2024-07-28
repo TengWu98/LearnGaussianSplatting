@@ -7,6 +7,8 @@ from . import yacs
 # root config object
 cfg = CN()
 
+cfg.scene = 'default'
+
 # task
 cfg.task = "default"
 cfg.task_arg = CN()
@@ -72,7 +74,7 @@ def parse_cfg(cfg, args):
         os.environ["CUDA_VISIBLE_DEVICES"] = ",".join([str(gpu) for gpu in cfg.gpu_ids])
 
     # experiment name
-    print('current experiment: {}: {}'.format(cfg.task, cfg.exp_name))
+    print('{}: {}'.format(cfg.task, cfg.exp_name))
 
 def make_config(args):
     """
