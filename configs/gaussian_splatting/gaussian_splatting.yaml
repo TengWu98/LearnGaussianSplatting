@@ -1,4 +1,4 @@
-task: gaussian
+task: gaussian_splatting
 exp_name: gaussian_splatting
 gpu_ids: [0]
 
