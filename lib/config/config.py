@@ -73,9 +73,6 @@ cfg.test.sampler_meta = CN({})
 def parse_cfg(cfg, args):
     """
     parse the config object
-    :param cfg: cfg object
-    :param args:
-    :return: None
     """
     # task must be specified
     if len(cfg.task) == 0:
@@ -91,8 +88,6 @@ def parse_cfg(cfg, args):
 def make_config(args):
     """
     make config object from the config file(or merge a config file) and the args
-    :param args:
-    :return: cfg object
     """
     def merge_cfg(cfg_file, cfg):
         with open(cfg_file, "r") as f:
