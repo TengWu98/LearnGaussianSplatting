@@ -37,6 +37,12 @@ cfg.skip_eval = False
 # visualizer
 cfg.visualizer_module = ""
 
+# 分布式训练
+cfg.distributed = False
+
+# epoch
+cfg.epoch_iter = -1
+
 # -----------------------------------------------------------------------------
 # train
 # -----------------------------------------------------------------------------
@@ -49,6 +55,9 @@ cfg.train.optimizer = "adam"
 cfg.train.learning_rate = 1e-3
 cfg.train.weight_decay = 0.
 cfg.train.batch_size = 4
+cfg.train.collator = 'default'
+cfg.train.batch_sampler = 'default'
+cfg.train.sampler_meta = CN({})
 
 # -----------------------------------------------------------------------------
 # test
@@ -56,6 +65,9 @@ cfg.train.batch_size = 4
 cfg.test = CN()
 cfg.test.num_epoch = -1
 cfg.test.batch_size = 1
+cfg.test.collator = 'default'
+cfg.test.batch_sampler = 'default'
+cfg.test.sampler_meta = CN({})
 
 
 def parse_cfg(cfg, args):

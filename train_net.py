@@ -10,7 +10,7 @@ from lib.evaluators import make_evaluator
 
 def train(cfg, network):
     # data loader
-    train_loader = make_data_loader(cfg, is_train=True)
+    train_loader = make_data_loader(cfg, is_train=True, is_distributed=cfg.distributed, max_iter=cfg.epoch_iter)
     val_loader = make_data_loader(cfg, is_train=False)
 
     # trainer
@@ -33,6 +33,10 @@ def test(cfg, network):
 
 
 def main():
+    if cfg.distributed:
+        # TODO(WT) 处理分布式训练逻辑
+        pass
+
     network = make_network(cfg)
 
     if args.test:
