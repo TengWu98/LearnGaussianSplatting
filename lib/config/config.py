@@ -82,6 +82,9 @@ def parse_cfg(cfg, args):
     if -1 not in cfg.gpu_ids:
         os.environ["CUDA_VISIBLE_DEVICES"] = ",".join([str(gpu) for gpu in cfg.gpu_ids])
 
+    # distributed training
+    cfg.local_rank = args.local_rank
+
     # experiment name
     print('{}: {}'.format(cfg.task, cfg.exp_name))
 
@@ -112,5 +115,6 @@ def make_config(args):
 parser = argparse.ArgumentParser()
 parser.add_argument("--cfg_file", default="configs/default.yaml", type=str)
 parser.add_argument("--test", action="store_true", dest="test", default=False)
+parser.add_argument("--local_rank", default=0, type=int)
 args = parser.parse_args()
 cfg = make_config(args)
