@@ -40,6 +40,9 @@ cfg.visualizer_module = ""
 # 分布式训练
 cfg.distributed = False
 
+# if load the pretrained model
+cfg.resume = True
+
 # epoch
 cfg.epoch_iter = -1
 cfg.log_interval = 20

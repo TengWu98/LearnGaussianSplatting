@@ -6,6 +6,7 @@ from lib.networks import make_network
 from lib.datasets import make_data_loader
 from lib.train import make_trainer, make_optimizer, make_lr_scheduler, set_lr_scheduler, make_recorder
 from lib.evaluators import make_evaluator
+from lib.utils.net_utils import load_model
 
 
 def train(cfg, network):
@@ -20,6 +21,7 @@ def train(cfg, network):
     recorder = make_recorder(cfg)
     evaluator = make_evaluator(cfg)
 
+    begin_epoch = load_model(network, optimizer, lr_scheduler, recorder, cfg.trained_model_dir, resume=cfg.resume)
 
     set_lr_scheduler(cfg, lr_scheduler)
 

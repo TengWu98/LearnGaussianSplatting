@@ -5,5 +5,5 @@ import numpy as np
 
 from lib.config import cfg
 
-def load_model(net, optimizer, lr_scheduler, model_dir, resume=True, epoch=-1):
+def load_model(network, optimizer, lr_scheduler, model_dir, resume=True, epoch=-1):
     pass
