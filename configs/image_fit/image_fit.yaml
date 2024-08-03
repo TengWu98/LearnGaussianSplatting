@@ -4,12 +4,15 @@ scene: 'lego'
 gpu_ids: [0]
 
 # modules
-train_dataset_module: lib.datasets.image_fit.synthetic
-test_dataset_module: lib.datasets.image_fit.synthetic
-network_module: lib.networks.image_fit.network
-loss_module: lib.train.losses.image_fit.loss
-evaluator_module: lib.evaluators.image_fit.evaluator
-#visualizer_module: lib.visualizers.image_fit.visualizer
+train_dataset_module: projects.image_fit.datasets.synthetic
+test_dataset_module: projects.image_fit.datasets.synthetic
+network_module: projects.image_fit.network.network
+loss_module: projects.image_fit.loss
+evaluator_module: projects.image_fit.evaluators.evaluator
+visualizer_module: projects.image_fit.visualizers.visualizer
+
+epoch_iter: 500
+log_interval: 100
 
 # task_args
 task_args:

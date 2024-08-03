@@ -4,7 +4,7 @@ import os
 from lib.config import cfg, args
 from lib.networks import make_network
 from lib.datasets import make_data_loader
-from lib.train import make_trainer
+from lib.train import make_trainer, make_optimizer, make_lr_scheduler, set_lr_scheduler, make_recorder
 from lib.evaluators import make_evaluator
 
 
@@ -15,9 +15,13 @@ def train(cfg, network):
 
     # trainer
     trainer = make_trainer(cfg, network, train_loader)
-
-    # evaluator
+    optimizer = make_optimizer(cfg, network)
+    lr_scheduler = make_lr_scheduler(cfg, optimizer)
+    recorder = make_recorder(cfg)
     evaluator = make_evaluator(cfg)
+
+
+    set_lr_scheduler(cfg, lr_scheduler)
 
     return network
 

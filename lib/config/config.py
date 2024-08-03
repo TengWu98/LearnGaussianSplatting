@@ -42,6 +42,7 @@ cfg.distributed = False
 
 # epoch
 cfg.epoch_iter = -1
+cfg.log_interval = 20
 
 # -----------------------------------------------------------------------------
 # train
@@ -58,6 +59,7 @@ cfg.train.batch_size = 4
 cfg.train.collator = 'default'
 cfg.train.batch_sampler = 'default'
 cfg.train.sampler_meta = CN({})
+cfg.train.lr_scheduler = CN({'type': 'multi_step', 'milestones': [80, 120, 200, 240], 'gamma': 0.5})
 
 # -----------------------------------------------------------------------------
 # test
@@ -81,9 +83,9 @@ def parse_cfg(cfg, args):
     # assign the gpus (-1 means cpu)
     if -1 not in cfg.gpu_ids:
         os.environ["CUDA_VISIBLE_DEVICES"] = ",".join([str(gpu) for gpu in cfg.gpu_ids])
+    cfg.local_rank = args.local_rank # The gpu id where the current process is located
 
-    # distributed training
-    cfg.local_rank = args.local_rank
+
 
     # experiment name
     print('{}: {}'.format(cfg.task, cfg.exp_name))
