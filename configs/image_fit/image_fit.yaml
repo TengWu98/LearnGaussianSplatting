@@ -4,12 +4,11 @@ scene: 'lego'
 gpu_ids: [0]
 
 # modules
-train_dataset_module: projects.image_fit.datasets.synthetic
-test_dataset_module: projects.image_fit.datasets.synthetic
+train_dataset_module: projects.image_fit.synthetic
+test_dataset_module: projects.image_fit.synthetic
 network_module: projects.image_fit.network
 loss_module: projects.image_fit.loss
 evaluator_module: projects.image_fit.evaluator
-#visualizer_module: projects.image_fit.visualizer
 
 # epoch
 epoch_iter: 500
