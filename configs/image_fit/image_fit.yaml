@@ -9,15 +9,27 @@ test_dataset_module: projects.image_fit.datasets.synthetic
 network_module: projects.image_fit.network
 loss_module: projects.image_fit.loss
 evaluator_module: projects.image_fit.evaluator
-visualizer_module: projects.image_fit.visualizer
+#visualizer_module: projects.image_fit.visualizer
 
+# epoch
 epoch_iter: 500
+save_latest_epoch: 20
+eval_epoch: 10
 log_interval: 100
 
 # task_args
 task_args:
   N_pixels: 8192
   chunk_size: 16384
+
+# network
+network:
+    W: 128
+    D: 4
+    uv_encoder:
+        type: 'frequency'
+        input_dim: 2
+        freq: 10
 
 # train_dataset
 train_dataset:

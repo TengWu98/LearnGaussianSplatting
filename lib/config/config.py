@@ -11,10 +11,13 @@ cfg.scene = 'default'
 
 # task
 cfg.task = "default"
-cfg.task_arg = CN()
+cfg.task_args = CN()
 
 # experiment name
 cfg.exp_name = "default"
+
+# pretrain
+cfg.pretrain = ''
 
 # gpu_ids
 cfg.gpu_ids = [0]
@@ -30,13 +33,6 @@ cfg.network_module = ""
 # loss
 cfg.loss_module = ""
 
-# evaluator
-cfg.evaluator_module = ""
-cfg.skip_eval = False
-
-# visualizer
-cfg.visualizer_module = ""
-
 # 分布式训练
 cfg.distributed = False
 
@@ -45,7 +41,28 @@ cfg.resume = True
 
 # epoch
 cfg.epoch_iter = -1
+cfg.save_epoch = 100000
+cfg.save_latest_epoch = 1
+cfg.eval_epoch = 1
+
+# log
 cfg.log_interval = 20
+
+# trained model
+cfg.trained_model_dir = 'data/trained_model'
+
+# recorder
+cfg.recorder_dir = 'data/recorder'
+
+# result
+cfg.result_dir = 'data/result'
+
+# evaluator
+cfg.evaluator_module = ""
+cfg.skip_eval = False
+
+# visualizer
+cfg.visualizer_module = ""
 
 # -----------------------------------------------------------------------------
 # train

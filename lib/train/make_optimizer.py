@@ -8,13 +8,13 @@ _optimizer_factory = {
     'sgd': torch.optim.SGD
 }
 
-def make_optimizer(cfg, net):
+def make_optimizer(cfg, network):
     params = []
     lr = cfg.train.learning_rate
     weight_decay = cfg.train.weight_decay
     eps = cfg.train.eps
 
-    for key, value in net.named_parameters():
+    for key, value in network.named_parameters():
         if not value.requires_grad:
             continue
         params += [{'params': [value], 'lr': lr, 'weight_decay': weight_decay}]
@@ -22,6 +22,6 @@ def make_optimizer(cfg, net):
     if 'adam' in cfg.train.optimizer:
         optimizer = _optimizer_factory[cfg.train.optimizer](params, lr, weight_decay=weight_decay, eps=eps)
     else:
-        optimizer = _optimizer_factory[cfg.train.optimizer](params, lr, momentun=0.9)
+        optimizer = _optimizer_factory[cfg.train.optimizer](params, lr, momentum=0.9)
 
     return optimizer

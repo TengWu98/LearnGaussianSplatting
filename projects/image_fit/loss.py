@@ -2,14 +2,14 @@ import torch
 import torch.nn as nn
 
 class NetworkWrapper(nn.Module):
-    def __init__(self, net, train_loader):
+    def __init__(self, network, train_loader):
         super(NetworkWrapper, self).__init__()
-        self.net = net
+        self.network = network
         self.color_crit = nn.MSELoss(reduction='mean')
         self.mse2pnsr = lambda x : -10. * torch.log(x) / torch.log(torch.Tensor([10.])) # convert mse to psnr
 
     def forward(self, batch):
-        output = self.net(batch)
+        output = self.network(batch)
 
         scalar_stats = {}
         loss = 0

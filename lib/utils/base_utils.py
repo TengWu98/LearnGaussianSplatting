@@ -1,6 +1,8 @@
 import torch
 from torch import nn
 
+from lib.config import cfg
+
 def to_cuda(batch, device=torch.device('cuda:0')):
     """
     Move batch to cuda device
@@ -18,3 +20,9 @@ def to_cuda(batch, device=torch.device('cuda:0')):
     else: # tensor or others
         batch = batch.to(device)
     return batch
+
+def is_main_process():
+    """
+    Check if the current process is the main process
+    """
+    return cfg.local_rank == 0

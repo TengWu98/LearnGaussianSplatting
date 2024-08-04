@@ -6,7 +6,7 @@ import time
 import datetime
 
 from lib.config import cfg
-from lib.utils.base_utils import to_cuda
+from lib.utils.base_utils import to_cuda, is_main_process
 
 class Trainer(object):
     def __init__(self, network):
@@ -47,7 +47,7 @@ class Trainer(object):
             nn.utils.clip_grad_value_(self.network.parameters(), 40) # clip gradient
             optimizer.step()
 
-            if cfg.loacl_rank > 0:
+            if not is_main_process():
                 continue
 
             # data recording
@@ -65,7 +65,7 @@ class Trainer(object):
 
             # periodically print training stats.
             if iteration % cfg.log_interval == 0 or iteration == max_iter:
-                eta_seconds = recorder.batch_time.globalavg * (max_iter - iteration + 1)
+                eta_seconds = recorder.batch_time.global_avg * (max_iter - iteration + 1)
                 eta_string = str(datetime.timedelta(seconds=int(eta_seconds)))
                 lr = optimizer.param_groups[0]['lr']
                 memory = torch.cuda.max_memory_allocated() / 1024.0 / 1024.0

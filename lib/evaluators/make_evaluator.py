@@ -7,10 +7,6 @@ def _evaluator_factory(cfg):
     return evaluator_class()
 
 def make_evaluator(cfg):
-    """
-    :param cfg:
-    :return:
-    """
     if cfg.skip_eval:
         return None
     return _evaluator_factory(cfg)
